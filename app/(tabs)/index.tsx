@@ -31,15 +31,33 @@ https://ideogram.ai/assets/progressive-image/balanced/response/CAxwMPAUT0WTPl_Rj
 */
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { View, Text, Image } from "react-native";
+import { SafeAreaView, Text, Image, StyleSheet } from "react-native";
 
 export default function explore(){
-    return <View style={{flex:1}}>
+    return <SafeAreaView style={{flex:1}}>
         <ParallaxScrollView
             headerBackgroundColor={{dark:"black", light:"white"}}
-            headerImage={<Image style={{flex:1}} source={{uri: "https://ideogram.ai/assets/progressive-image/balanced/response/Qe7xc3cpQZKvL7-8dArixQ"}}></Image>}
+            headerImage={
+                <Image
+                    // style={{ width: 200, height: 200 }}
+                    style={styles.image}
+                    source={require('../../assets/images/background-mkbhd.png')}                
+                  />}
+            // headerImage={<Image style={{flex:1}} source={{uri: "https://ideogram.ai/assets/progressive-image/balanced/response/Qe7xc3cpQZKvL7-8dArixQ"}}/>}
         >
             <Text>Explore</Text>
         </ParallaxScrollView>
-    </View>
+    </SafeAreaView>
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        overflow: "hidden", // Ensures the image is cropped
+        height: 200,        // Height of the visible part
+      },
+      image: {
+        width: "100%",
+        height: 650, // Larger height will allow cropping the top
+      },
+  });
