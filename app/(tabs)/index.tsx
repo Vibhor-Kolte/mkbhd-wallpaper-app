@@ -1,7 +1,7 @@
 import ImageCard from "@/components/ImageCard";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useWallpapers, Wallpaper } from "@/hooks/useWallpapers";
-import { SafeAreaView, Text, Image, StyleSheet } from "react-native";
+import { View, SafeAreaView, Text, Image, StyleSheet } from "react-native";
 
 export default function explore(){
     const wallpapers = useWallpapers();
@@ -16,7 +16,15 @@ export default function explore(){
                   />}
         >
             <Text>Explore</Text>
-            {wallpapers.map((w : Wallpaper) => <ImageCard wallpaper={w} />)}
+            <View style={styles.container}>
+                <View style={styles.innerContainer}>
+                    {wallpapers.map((w : Wallpaper) => <ImageCard wallpaper={w} />)}
+                </View>
+
+                <View style={styles.innerContainer}>
+                    {wallpapers.map((w : Wallpaper) => <ImageCard wallpaper={w} />)}
+                </View>
+            </View>
         </ParallaxScrollView>
     </SafeAreaView>
 }
@@ -24,11 +32,16 @@ export default function explore(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        overflow: "hidden", // Ensures the image is cropped
-        height: 200,        // Height of the visible part
-      },
-      image: {
+        flexDirection: "row"
+    },
+    innerContainer: {
+        flex: 1,
+        padding: 10
+        // overflow: "hidden", // Ensures the image is cropped
+        // height: 200,        // Height of the visible part
+    },
+    image: {
         width: "100%",
         height: 650, // Larger height will allow cropping the top
-      },
-  });
+    },
+});
