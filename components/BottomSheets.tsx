@@ -1,7 +1,10 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { Wallpaper } from '@/hooks/useWallpapers';
+import { Ionicons } from '@expo/vector-icons';
+import { Colors } from '@/constants/Colors';
 
 export const DownloadPicture = ({onClose, wallpaper}:{
     onClose: () => void;
@@ -9,6 +12,7 @@ export const DownloadPicture = ({onClose, wallpaper}:{
 }) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const theme = useColorScheme() ?? 'light';
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -27,7 +31,16 @@ export const DownloadPicture = ({onClose, wallpaper}:{
         handleStyle={{display: "none"}}
       >
         <BottomSheetView style={styles.contentContainer}>
-          <Image style={styles.image} source={wallpaper.path}/>
+          <View style={styles.container}>
+            <Image style={styles.image} source={wallpaper.path}/>
+          </View>
+          <View style={styles.closeIcon}>
+            <Ionicons
+                name={'close'}
+                size={18}
+                color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+              />
+          </View>
           <Button title='Download Picture'/>
         </BottomSheetView>
       </BottomSheet>
@@ -36,7 +49,8 @@ export const DownloadPicture = ({onClose, wallpaper}:{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    height:"50%",
+    width:"100%",
   },
   contentContainer: {
     flex: 1,
@@ -44,9 +58,14 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
   image:{
-    height:"40%",
+    height:"100%",
     width:"100%",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: 15,
+  },
+  closeIcon:{
+    position: "absolute",  // makes it visible on the image
+    padding: 10,
+    display: "flex",
+    justifyContent: "space-between"
   }
 });
