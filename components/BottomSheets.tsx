@@ -24,9 +24,10 @@ export const DownloadPicture = ({onClose, wallpaper}:{
         onChange={handleSheetChanges}
         enablePanDownToClose={true}
         onClose={onClose}
+        handleStyle={{display: "none"}}
       >
         <BottomSheetView style={styles.contentContainer}>
-          <Image style={{height:"60%", width:"100%"}} source={wallpaper.path}/>
+          <Image style={styles.image} source={wallpaper.path}/>
           <Button title='Download Picture'/>
         </BottomSheetView>
       </BottomSheet>
@@ -39,7 +40,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    padding: 10,
-    alignItems: 'center',
+    // padding: 10,
+    // alignItems: 'center',
   },
+  image:{
+    height:"40%",
+    width:"100%",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  }
 });
