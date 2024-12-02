@@ -16,7 +16,7 @@ export const DownloadPicture = ({onClose}:{
 
   // renders
   return (
-    <GestureHandlerRootView style={styles.container}>
+    // <GestureHandlerRootView style={styles.container}>
       <BottomSheet
         handleIndicatorStyle={{height:0}}   // disable bottomsheet upper notch
         snapPoints={['99%']}
@@ -29,7 +29,7 @@ export const DownloadPicture = ({onClose}:{
           <Text>Awesome 🎉</Text>
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+    // </GestureHandlerRootView>
   );
 };
 
