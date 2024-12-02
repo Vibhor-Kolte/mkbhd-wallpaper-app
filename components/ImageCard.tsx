@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     height: 300,
+    width: "100%",
+    borderRadius: 20
   },
   label: {
     color: "white"
