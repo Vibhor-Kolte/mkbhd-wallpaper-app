@@ -1,10 +1,11 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { Wallpaper } from '@/hooks/useWallpapers';
 
-export const DownloadPicture = ({onClose}:{
+export const DownloadPicture = ({onClose, wallpaper}:{
     onClose: () => void;
+    wallpaper: Wallpaper
 }) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -16,7 +17,6 @@ export const DownloadPicture = ({onClose}:{
 
   // renders
   return (
-    // <GestureHandlerRootView style={styles.container}>
       <BottomSheet
         handleIndicatorStyle={{height:0}}   // disable bottomsheet upper notch
         snapPoints={['99%']}
@@ -26,10 +26,10 @@ export const DownloadPicture = ({onClose}:{
         onClose={onClose}
       >
         <BottomSheetView style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
+          <Image style={{height:"60%", width:"100%"}} source={wallpaper.path}/>
+          <Button title='Download Picture'/>
         </BottomSheetView>
       </BottomSheet>
-    // </GestureHandlerRootView>
   );
 };
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    padding: 36,
+    padding: 10,
     alignItems: 'center',
   },
 });
