@@ -1,7 +1,8 @@
 import ImageCard from "@/components/ImageCard";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedView } from "@/components/ThemedView";
 import { useWallpapers, Wallpaper } from "@/hooks/useWallpapers";
-import { View, SafeAreaView, Text, Image, StyleSheet } from "react-native";
+import { View, SafeAreaView, Text, Image, StyleSheet, FlatList } from "react-native";
 
 export default function explore(){
     const wallpapers = useWallpapers();
@@ -16,15 +17,23 @@ export default function explore(){
                   />}
         >
             <Text>Explore</Text>
-            <View style={styles.container}>
-                <View style={styles.innerContainer}>
-                    {wallpapers.map((w : Wallpaper) => <ImageCard wallpaper={w} />)}
-                </View>
+            <ThemedView style={styles.container}>
+                <ThemedView style={styles.innerContainer}>
+                    <FlatList
+                        data={wallpapers.filter((_, index) => index % 2 === 0)}
+                        renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} /></View>}
+                        keyExtractor={item => item.name}
+                    />
+                </ThemedView>
 
-                <View style={styles.innerContainer}>
-                    {wallpapers.map((w : Wallpaper) => <ImageCard wallpaper={w} />)}
-                </View>
-            </View>
+                <ThemedView style={styles.innerContainer}>
+                    <FlatList
+                        data={wallpapers.filter((_, index) => index % 2 === 1)}
+                        renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} /></View>}
+                        keyExtractor={item => item.name}
+                    />
+                </ThemedView>
+            </ThemedView>
         </ParallaxScrollView>
     </SafeAreaView>
 }
@@ -36,7 +45,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        padding: 10
+        padding: 10,
         // overflow: "hidden", // Ensures the image is cropped
         // height: 200,        // Height of the visible part
     },
@@ -44,4 +53,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 650, // Larger height will allow cropping the top
     },
+    imageContainer:{
+        paddingVertical: 10,
+    }
 });
