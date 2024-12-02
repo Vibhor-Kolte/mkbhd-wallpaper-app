@@ -4,24 +4,30 @@ import { ThemedText } from "./ThemedText";
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from "@expo/vector-icons";
+import { Pressable } from "react-native-gesture-handler";
 
-export default function ImageCard({ wallpaper }: { wallpaper: Wallpaper }) {
+export default function ImageCard({ wallpaper, onPress }: { 
+  wallpaper: Wallpaper 
+  onPress: () => void
+}) {
   const theme = useColorScheme() ?? 'light';
 
   return (
-    <View>
-      <Image source={wallpaper.path} style={styles.image} />
-      <View style={styles.labelContainer}>
-        <ThemedText style={styles.label}>{wallpaper.name}</ThemedText>
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name={'heart'}
-            size={18}
-            color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          />
+    <Pressable onPress={onPress}>
+      <View>
+        <Image source={wallpaper.path} style={styles.image} />
+        <View style={styles.labelContainer}>
+          <ThemedText style={styles.label}>{wallpaper.name}</ThemedText>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name={'heart'}
+              size={18}
+              color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
