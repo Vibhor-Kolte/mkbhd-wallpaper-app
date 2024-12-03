@@ -1,10 +1,11 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, Pressable } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Wallpaper } from '@/hooks/useWallpapers';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
+import { ThemedText } from './ThemedText';
 
 export const DownloadPicture = ({onClose, wallpaper}:{
     onClose: () => void;
@@ -34,18 +35,52 @@ export const DownloadPicture = ({onClose, wallpaper}:{
           <View style={styles.container}>
             <Image style={styles.image} source={wallpaper.path}/>
           </View>
-          <View style={styles.closeIcon}>
+          <View style={styles.topbar}>
             <Ionicons
                 name={'close'}
-                size={18}
+                size={24}
                 color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
               />
+              <View style={styles.topbarleft}>
+                <Ionicons
+                  name={'heart'}
+                  size={24}
+                  color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+                />
+                <Ionicons
+                  name={'share'}
+                  size={24}
+                  color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+                  style={{paddingLeft:6}}
+                />
+              </View>
           </View>
-          <Button title='Download Picture'/>
+          <View>
+            <ThemedText style={styles.text}>{wallpaper.name}</ThemedText>
+          </View>
+          {/* <Button title='Download Picture'/> */}
+          <DownloadButton/>
         </BottomSheetView>
       </BottomSheet>
   );
 };
+
+function DownloadButton(){
+  const theme = useColorScheme() ?? 'light';
+  return(
+    <Pressable style={{backgroundColor:"black", padding:10, marginHorizontal:30, borderRadius:20, justifyContent:"center"}}>
+      <View style={{ flexDirection: "row", justifyContent:"center" }}>
+        <Ionicons
+          name={'download'}
+          size={24}
+          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+          style={{paddingLeft:6}}
+        />
+        <Text style={{fontSize:20, color:"white", textAlign:"center", fontWeight:"600"}}>Download Picture</Text>
+      </View>
+    </Pressable>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -54,18 +89,28 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    // padding: 10,
-    // alignItems: 'center',
   },
   image:{
     height:"100%",
     width:"100%",
     borderRadius: 15,
   },
-  closeIcon:{
+  topbar:{
     position: "absolute",  // makes it visible on the image
     padding: 10,
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    flexDirection:"row",
+    width: "100%",
+  },
+  topbarleft:{
+    display: "flex",
+    flexDirection:"row"
+  },
+  text:{
+    textAlign:"center",
+    fontSize: 20,
+    fontWeight: "600",
+    padding: 10
   }
 });

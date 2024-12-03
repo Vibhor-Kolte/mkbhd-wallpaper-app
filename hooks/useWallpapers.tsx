@@ -7,27 +7,27 @@ export interface Wallpaper {
     return [
       {
         path: require("../assets/images/image1.png"),
-        name: "image1",
+        name: "Image1",
       },
       {
         path: require("../assets/images/image2.png"),
-        name: "image2",
+        name: "Image2",
       },
       {
         path: require("../assets/images/image3.png"),
-        name: "image3",
+        name: "Image3",
       },
       {
         path: require("../assets/images/image4.png"),
-        name: "image4",
+        name: "Image4",
       },
       {
         path: require("../assets/images/image5.png"),
-        name: "image5",
+        name: "Image5",
       },
       {
         path: require("../assets/images/image6.png"),
-        name: "image6",
+        name: "Image6",
       },
     ];
   }  
