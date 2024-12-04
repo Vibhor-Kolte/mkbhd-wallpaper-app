@@ -15,24 +15,24 @@ export default function SplitView({wallpapers}:{
     return(
         <>
         <ThemedView style={styles.container}>
-                <ThemedView style={styles.innerContainer}>
-                    <FlatList
-                        data={wallpapers.filter((_, index) => index % 2 === 0)}
-                        renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
-                        keyExtractor={item => item.name}
-                    />
-                </ThemedView>
-
-                <ThemedView style={styles.innerContainer}>
-                    <FlatList
-                        data={wallpapers.filter((_, index) => index % 2 === 1)}
-                        renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
-                        keyExtractor={item => item.name}
-                    />
-                </ThemedView>
+            <ThemedView style={styles.innerContainer}>
+                <FlatList
+                    data={wallpapers.filter((_, index) => index % 2 === 0)}
+                    renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
+                    keyExtractor={item => item.name}
+                />
             </ThemedView>
-            {selectedWallpaper && <DownloadPicture onClose={() => {setSelectedWallpaper(null)}} wallpaper={selectedWallpaper}/>}
-            </>
+
+            <ThemedView style={styles.innerContainer}>
+                <FlatList
+                    data={wallpapers.filter((_, index) => index % 2 === 1)}
+                    renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
+                    keyExtractor={item => item.name}
+                />
+            </ThemedView>
+        </ThemedView>
+        {selectedWallpaper && <DownloadPicture onClose={() => {setSelectedWallpaper(null)}} wallpaper={selectedWallpaper}/>}
+        </>
     )
 }
 
