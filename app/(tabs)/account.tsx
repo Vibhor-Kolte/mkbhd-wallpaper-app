@@ -1,15 +1,17 @@
+import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, StyleSheet, SafeAreaView } from "react-native";
 
 export default function account(){
     const theme = useColorScheme() ?? 'light';
 
-    return <View style={{flex:1}}>
-        <Text>Account</Text>
+    return <SafeAreaView style={{flex:1}}>
+        {/* <Text>Account</Text> */}
         {/* <Link href={"/accountinfo"}><Text>Account Info</Text></Link> */}
+        <Header/>
 
         <AuthButton 
             label="Sign In" 
@@ -31,6 +33,13 @@ export default function account(){
             />}
         />
 
+    </SafeAreaView>
+}
+
+function Header(){
+    return <View style={styles.topBar}>
+        <ThemedText style={styles.bigText}>Panels</ThemedText>
+        <ThemedText>Sign in to save your data</ThemedText>
     </View>
 }
 
@@ -48,3 +57,13 @@ function AuthButton({icon, label}:{
     </Pressable>
   )
 }
+
+const styles = StyleSheet.create({
+    bigText:{
+        fontSize: 25,
+        fontWeight: 600
+    },
+    topBar:{
+        padding: 20
+    }
+})
