@@ -6,13 +6,25 @@ import { Link } from "expo-router";
 import { View, Text, Pressable, StyleSheet, SafeAreaView } from "react-native";
 
 export default function account(){
-    const theme = useColorScheme() ?? 'light';
-
     return <SafeAreaView style={{flex:1}}>
         {/* <Text>Account</Text> */}
         {/* <Link href={"/accountinfo"}><Text>Account Info</Text></Link> */}
         <Header/>
+        <LoginButton/>
+    </SafeAreaView>
+}
 
+function Header(){
+    return <View style={styles.topBar}>
+        <ThemedText style={styles.bigText}>Panels</ThemedText>
+        <ThemedText>Sign in to save your data</ThemedText>
+    </View>
+}
+
+function LoginButton(){
+    const theme = useColorScheme() ?? 'light';
+
+    return <>
         <AuthButton 
             label="Sign In" 
             icon={<Ionicons
@@ -32,15 +44,7 @@ export default function account(){
                 style={{paddingLeft:6}}
             />}
         />
-
-    </SafeAreaView>
-}
-
-function Header(){
-    return <View style={styles.topBar}>
-        <ThemedText style={styles.bigText}>Panels</ThemedText>
-        <ThemedText>Sign in to save your data</ThemedText>
-    </View>
+    </>
 }
 
 function AuthButton({icon, label}:{
