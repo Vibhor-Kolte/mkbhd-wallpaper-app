@@ -62,6 +62,7 @@ export const DownloadPicture = ({onClose, wallpaper}:{
               <ThemedText style={styles.text}>{wallpaper.name}</ThemedText>
             </ThemedView>
             {/* <Button title='Download Picture'/> */}
+
             <DownloadButton/>
 
           </ThemedView>
@@ -88,7 +89,7 @@ function DownloadButton(){
 
 const styles = StyleSheet.create({
   container: {
-    height:"50%",
+    height:"75%",
     width:"100%",
     // flex:1
   },
