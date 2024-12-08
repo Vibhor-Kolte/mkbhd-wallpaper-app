@@ -1,16 +1,20 @@
 import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { View, Text, Pressable, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, Pressable, StyleSheet, SafeAreaView, Appearance } from "react-native";
 
 export default function account(){
     return <SafeAreaView style={{flex:1}}>
         {/* <Text>Account</Text> */}
         {/* <Link href={"/accountinfo"}><Text>Account Info</Text></Link> */}
         <Header/>
-        <LoginButton/>
+        <View style={{flex:1}}>
+            <LoginButton/>
+            <ThemeSelector/>
+        </View>
     </SafeAreaView>
 }
 
@@ -62,6 +66,27 @@ function AuthButton({icon, label}:{
   )
 }
 
+function ThemeButton({title, selected, colorScheme}:{title: string, selected: boolean, colorScheme: 'light'|'dark'|null|undefined}){
+    return <Pressable 
+        style={{padding:10, borderColor:"black", borderWidth: 1, borderRadius: 5, flex:0.3}}
+        onPress={() => {Appearance.setColorScheme(colorScheme)}}
+    >
+        <ThemedText style={{textAlign:"center"}}>{title}</ThemedText>
+    </Pressable>
+}
+
+function ThemeSelector(){
+    return <ThemedView style={{padding:20}}>
+        <ThemedText style={styles.bigText}>Settings</ThemedText>
+        <ThemedText>Theme</ThemedText>
+        <ThemedView style={styles.themeSelectorContainer}>
+            <ThemeButton title="Dark" selected={false} colorScheme="dark"/>
+            <ThemeButton title="Light" selected={false} colorScheme="light"/>
+            <ThemeButton title="System" selected={false} colorScheme={null}/>
+        </ThemedView>
+    </ThemedView>
+}
+
 const styles = StyleSheet.create({
     bigText:{
         fontSize: 25,
@@ -69,5 +94,10 @@ const styles = StyleSheet.create({
     },
     topBar:{
         padding: 20
+    },
+    themeSelectorContainer:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
     }
 })
