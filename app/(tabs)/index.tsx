@@ -15,7 +15,7 @@ export default function explore(){
                     source={require('../../assets/images/background-mkbhd.png')}                
                   />}
         >
-            <Text>Explore</Text>
+            {/* <Text>Explore</Text> */}
             <SplitView wallpapers={wallpapers}/>
         </ParallaxScrollView>
     </SafeAreaView>

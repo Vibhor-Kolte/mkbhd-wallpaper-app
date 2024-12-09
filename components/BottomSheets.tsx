@@ -6,6 +6,7 @@ import { Wallpaper } from '@/hooks/useWallpapers';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { ThemedText } from './ThemedText';
+import { ThemedView } from './ThemedView';
 
 export const DownloadPicture = ({onClose, wallpaper}:{
     onClose: () => void;
@@ -32,34 +33,39 @@ export const DownloadPicture = ({onClose, wallpaper}:{
         handleStyle={{display: "none"}}
       >
         <BottomSheetView style={styles.contentContainer}>
-          <View style={styles.container}>
+          <ThemedView style={styles.container}>
             <Image style={styles.image} source={wallpaper.path}/>
-          </View>
-          <View style={styles.topbar}>
-            <Ionicons
-                name={'close'}
-                size={24}
-                color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-              />
-              <View style={styles.topbarleft}>
-                <Ionicons
-                  name={'heart'}
+
+            <View style={styles.topbar}>
+              <Ionicons
+                  name={'close'}
                   size={24}
-                  color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+                  color={theme === 'light' ? Colors.light.icon : Colors.dark.text}
                 />
-                <Ionicons
-                  name={'share'}
-                  size={24}
-                  color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-                  style={{paddingLeft:6}}
-                />
-              </View>
-          </View>
-          <View>
-            <ThemedText style={styles.text}>{wallpaper.name}</ThemedText>
-          </View>
-          {/* <Button title='Download Picture'/> */}
-          <DownloadButton/>
+                <View style={styles.topbarleft}>
+                  <Ionicons
+                    name={'heart'}
+                    size={24}
+                    color={theme === 'light' ? Colors.light.icon : Colors.dark.text}
+                  />
+                  <Ionicons
+                    name={'share'}
+                    size={24}
+                    color={theme === 'light' ? Colors.light.icon : Colors.dark.text}
+                    style={{paddingLeft:6}}
+                  />
+                </View>
+            </View>
+          
+
+            <ThemedView>
+              <ThemedText style={styles.text}>{wallpaper.name}</ThemedText>
+            </ThemedView>
+            {/* <Button title='Download Picture'/> */}
+
+            <DownloadButton/>
+
+          </ThemedView>
         </BottomSheetView>
       </BottomSheet>
   );
@@ -68,24 +74,24 @@ export const DownloadPicture = ({onClose, wallpaper}:{
 function DownloadButton(){
   const theme = useColorScheme() ?? 'light';
   return(
-    <Pressable style={{backgroundColor:"black", padding:10, marginHorizontal:30, borderRadius:20, justifyContent:"center"}}>
-      <View style={{ flexDirection: "row", justifyContent:"center" }}>
+    <Pressable style={{backgroundColor:theme === 'light' ? Colors.light.icon : 'black', padding:10, marginHorizontal:30, borderRadius:20, justifyContent:"center", flexDirection: "row", borderWidth: 1,
+      borderColor: theme === 'light' ? Colors.light.text : Colors.dark.text,}}>
         <Ionicons
           name={'download'}
           size={24}
-          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
+          color={theme === 'light' ? Colors.light.text : Colors.dark.text}
           style={{paddingLeft:6}}
         />
-        <Text style={{fontSize:20, color:"white", textAlign:"center", fontWeight:"600"}}>Download Picture</Text>
-      </View>
+        <ThemedText style={{fontSize:20, textAlign:"center", fontWeight:"600"}}>Download Picture</ThemedText>
     </Pressable>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    height:"50%",
+    height:"75%",
     width:"100%",
+    // flex:1
   },
   contentContainer: {
     flex: 1,

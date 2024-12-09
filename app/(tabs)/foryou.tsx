@@ -30,7 +30,7 @@ export default function foryou(){
 function LibraryScreen(){
     const libraryWallpapers = useLibraryWallpapers();
     return <View style={styles.container}>
-        <Text>Library Screen....</Text>
+        {/* <Text>Library Screen....</Text> */}
         <SplitView wallpapers={libraryWallpapers}/>
     </View>
 }
@@ -38,7 +38,7 @@ function LibraryScreen(){
 function LikedScreen(){
     const likedWallpapers = useLikedWallpapers();
     return <View style={styles.container}>
-        <Text>Liked Screen....</Text>
+        {/* <Text>Liked Screen....</Text> */}
         <SplitView wallpapers={likedWallpapers}/>
     </View>
 }
@@ -46,7 +46,7 @@ function LikedScreen(){
 function SuggestedScreen(){
     const suggestedWallpapers = useSuggestedWallpapers();
     return <View style={styles.container}>
-        <Text>Suggested Screen....</Text>
+        {/* <Text>Suggested Screen....</Text> */}
         <SplitView wallpapers={suggestedWallpapers}/>
     </View>
 }
