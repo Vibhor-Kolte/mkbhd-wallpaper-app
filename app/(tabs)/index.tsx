@@ -7,17 +7,17 @@ export default function explore(){
     const wallpapers = useWallpapers();
 
     return <SafeAreaView style={{flex:1}}>
-        <ParallaxScrollView
+        {/* <ParallaxScrollView
             headerBackgroundColor={{dark:"black", light:"white"}}
             headerImage={
                 <Image
                     style={styles.image}
                     source={require('../../assets/images/background-mkbhd.png')}                
                   />}
-        >
+        > */}
             {/* <Text>Explore</Text> */}
             <SplitView wallpapers={wallpapers}/>
-        </ParallaxScrollView>
+        {/* </ParallaxScrollView> */}
     </SafeAreaView>
 }
 

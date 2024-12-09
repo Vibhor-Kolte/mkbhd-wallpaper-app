@@ -4,7 +4,7 @@ import { Wallpaper } from "@/hooks/useWallpapers";
 import ImageCard from "./ImageCard";
 import { FlatList, View,StyleSheet } from "react-native";
 import { useState } from "react";
-import { DownloadPicture } from "./BottomSheets";
+import { DownloadPictureBottomsheet } from "./DownloadPictureBottomSheets";
 
 export default function SplitView({wallpapers}:{
     wallpapers: Wallpaper[]
@@ -14,24 +14,26 @@ export default function SplitView({wallpapers}:{
 
     return(
         <>
-        <ThemedView style={styles.container}>
-            <ThemedView style={styles.innerContainer}>
-                <FlatList
-                    data={wallpapers.filter((_, index) => index % 2 === 0)}
-                    renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
-                    keyExtractor={item => item.name}
-                />
-            </ThemedView>
+            <FlatList
+                data={wallpapers.filter((_, index) => index % 2 === 0).map((_, index) => [wallpapers[index], wallpapers[index+1]])}
+                renderItem={({item : [first, second]}) => 
+                    <ThemedView style={styles.container}>
+                        <ThemedView style={styles.innerContainer}>
+                            <View style={styles.imageContainer}>
+                                <ImageCard onPress={() => setSelectedWallpaper(first)} wallpaper={first}/>
+                            </View>
+                        </ThemedView>
 
-            <ThemedView style={styles.innerContainer}>
-                <FlatList
-                    data={wallpapers.filter((_, index) => index % 2 === 1)}
-                    renderItem={({item}) => <View style={styles.imageContainer}><ImageCard wallpaper={item} onPress={() => {setSelectedWallpaper(item)}} /></View>}
-                    keyExtractor={item => item.name}
-                />
-            </ThemedView>
-        </ThemedView>
-        {selectedWallpaper && <DownloadPicture onClose={() => {setSelectedWallpaper(null)}} wallpaper={selectedWallpaper}/>}
+                        <ThemedView style={styles.innerContainer}>
+                            <View style={styles.imageContainer}>
+                                <ImageCard onPress={() => setSelectedWallpaper(second)} wallpaper={second}/>
+                            </View>
+                        </ThemedView>
+                    </ThemedView>
+                }
+                keyExtractor={item => item[0].name}
+            />
+            {selectedWallpaper && <DownloadPictureBottomsheet onClose={() => {setSelectedWallpaper(null)}} wallpaper={selectedWallpaper}/>}
         </>
     )
 }

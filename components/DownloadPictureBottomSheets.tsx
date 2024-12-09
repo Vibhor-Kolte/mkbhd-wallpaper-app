@@ -8,7 +8,7 @@ import { Colors } from '@/constants/Colors';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 
-export const DownloadPicture = ({onClose, wallpaper}:{
+export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
     onClose: () => void;
     wallpaper: Wallpaper
 }) => {
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
   },
   text:{
     textAlign:"center",
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "600",
-    padding: 10
+    padding: 20
   }
 });
