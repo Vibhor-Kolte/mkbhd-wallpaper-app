@@ -14,41 +14,58 @@ import { View, Text, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import SplitView from "@/components/SplitView";
 import { useLibraryWallpapers, useLikedWallpapers, useSuggestedWallpapers, useWallpapers } from "@/hooks/useWallpapers";
+import { ThemedView } from "@/components/ThemedView";
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 const Tab = createMaterialTopTabNavigator();
 
 export default function foryou(){
+    const theme = useColorScheme() ?? 'light';
+    
     return(
-        <Tab.Navigator>
-            <Tab.Screen name="Library" component={LibraryScreen}/>
-            <Tab.Screen name="Liked" component={LikedScreen}/>
-            <Tab.Screen name="Suggested" component={SuggestedScreen}/>
-        </Tab.Navigator>
+        <View style={styles.container}>
+            <Tab.Navigator style={styles.container}
+                screenOptions={{
+                    tabBarActiveTintColor: Colors[theme].tint,
+                    tabBarStyle: {
+                        backgroundColor: Colors[theme].background,
+                    }, 
+                    tabBarIndicatorStyle: {
+                        backgroundColor: Colors[theme].indicator,
+                        height: 5
+                    }
+                }}>
+                <Tab.Screen name="Library" component={LibraryScreen}/>
+                <Tab.Screen name="Liked" component={LikedScreen}/>
+                <Tab.Screen name="Suggested" component={SuggestedScreen}/>
+            </Tab.Navigator>
+        </View>
     );
 }
 
 function LibraryScreen(){
     const libraryWallpapers = useLibraryWallpapers();
-    return <View style={styles.container}>
+    return <ThemedView style={styles.container}>
         {/* <Text>Library Screen....</Text> */}
         <SplitView wallpapers={libraryWallpapers}/>
-    </View>
+    </ThemedView>
 }
 
 function LikedScreen(){
     const likedWallpapers = useLikedWallpapers();
-    return <View style={styles.container}>
+    return <ThemedView style={styles.container}>
         {/* <Text>Liked Screen....</Text> */}
         <SplitView wallpapers={likedWallpapers}/>
-    </View>
+    </ThemedView>
 }
 
 function SuggestedScreen(){
     const suggestedWallpapers = useSuggestedWallpapers();
-    return <View style={styles.container}>
+    return <ThemedView style={styles.container}>
         {/* <Text>Suggested Screen....</Text> */}
         <SplitView wallpapers={suggestedWallpapers}/>
-    </View>
+    </ThemedView>
 }
 
 const styles = StyleSheet.create({
