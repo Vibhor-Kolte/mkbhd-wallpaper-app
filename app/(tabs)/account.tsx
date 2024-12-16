@@ -1,21 +1,42 @@
+import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import { View, Text, Pressable, StyleSheet, SafeAreaView, Appearance } from "react-native";
+import { Pressable, StyleSheet, Appearance, ScrollView } from "react-native";
 
 export default function account(){
-    return <SafeAreaView style={{flex:1}}>
-        {/* <Text>Account</Text> */}
-        {/* <Link href={"/accountinfo"}><Text>Account Info</Text></Link> */}
+    return <ThemedSafeAreaView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
         <Header/>
         <ThemedView style={{flex:1}}>
             <LoginButton/>
             <ThemeSelector/>
+            <About />
         </ThemedView>
-    </SafeAreaView>
+        </ScrollView>
+    </ThemedSafeAreaView>
+}
+
+function About() {
+    return <ThemedView style={{padding: 20}}>
+        <ThemedText style={styles.bigText}>About</ThemedText>
+        <ThemedView style={{ marginTop: 10 }}>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Accont</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Privacy Policy</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Terms of Service</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Licenses</ThemedText>
+            </Pressable>
+        </ThemedView>
+    </ThemedView>
 }
 
 function Header(){
