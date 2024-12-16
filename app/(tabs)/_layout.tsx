@@ -36,14 +36,14 @@ export default function(){
             name="index"
             options={{
               title: 'Explore',
-              tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+              tabBarIcon: ({ color }) => <FontAwesome size={28} name="compass" color={color} />,
             }}
           />
           <Tabs.Screen
             name="account"
             options={{
               title: 'Account',
-              tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+              tabBarIcon: ({ color }) => <FontAwesome size={28} name="user-circle" color={color} />,
             }}
           />
         </Tabs>
