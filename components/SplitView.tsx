@@ -20,27 +20,49 @@ export default function SplitView({wallpapers, onScroll}:{
                     let yOffset = e.nativeEvent.contentOffset.y / 1;
                     onScroll?.(yOffset);
                 }}
-                data={wallpapers.filter((_, index) => index % 2 === 0).map((_, index) => [wallpapers[index], wallpapers[index+1]])}
-                renderItem={({item : [first, second]}) => 
+                data={wallpapers.reduce<[Wallpaper, Wallpaper][]>((result, _, index, array) => {
+                    if (index % 2 === 0) {
+                        result.push([array[index], array[index + 1]]);
+                    }
+                    return result;
+                }, [])}
+                renderItem={({item : [first, second]}) =>(
                     <ThemedView style={styles.container}>
                         <ThemedView style={styles.innerContainer}>
                             <View style={styles.imageContainer}>
-                                <ImageCard onPress={() => setSelectedWallpaper(first)} wallpaper={first}/>
+                                {first && (
+                                    <ImageCard
+                                        onPress={() => setSelectedWallpaper(first)}
+                                        wallpaper={first}
+                                    />
+                                )}
                             </View>
                         </ThemedView>
-
+    
                         <ThemedView style={styles.innerContainer}>
                             <View style={styles.imageContainer}>
-                                <ImageCard onPress={() => setSelectedWallpaper(second)} wallpaper={second}/>
+                                {second && (
+                                    <ImageCard
+                                        onPress={() => setSelectedWallpaper(second)}
+                                        wallpaper={second}
+                                    />
+                                )}
                             </View>
                         </ThemedView>
                     </ThemedView>
-                }
-                keyExtractor={item => item[0].name}
+                )}
+                keyExtractor={(item, index) => `row-${index}`}
             />
-            {selectedWallpaper && <DownloadPictureBottomsheet onClose={() => {setSelectedWallpaper(null)}} wallpaper={selectedWallpaper}/>}
+            {selectedWallpaper && (
+                <DownloadPictureBottomsheet
+                    onClose={() => {
+                        setSelectedWallpaper(null);
+                    }}
+                    wallpaper={selectedWallpaper}
+                />
+            )}
         </>
-    )
+    );    
 }
 
 const styles = StyleSheet.create({

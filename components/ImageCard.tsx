@@ -15,7 +15,8 @@ export default function ImageCard({ wallpaper, onPress }: {
   return (
     <Pressable onPress={onPress}>
       <View>
-        <Image source={wallpaper.path} style={styles.image} />
+        {/* <Image source={wallpaper.path} style={styles.image} /> */}
+        <Image source={{uri: wallpaper.path}} style={styles.image} />
         <View style={styles.labelContainer}>
           <ThemedText style={styles.label}>{wallpaper.name}</ThemedText>
           <View style={styles.iconContainer}>

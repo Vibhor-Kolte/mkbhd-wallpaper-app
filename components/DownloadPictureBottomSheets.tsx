@@ -36,7 +36,8 @@ export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
       >
         <BottomSheetView style={styles.contentContainer}>
           <ThemedView style={styles.container}>
-            <Image style={styles.image} source={wallpaper.path}/>
+          {/* <Image style={styles.image} source={wallpaper.path}/> */}
+            <Image style={styles.image} source={{uri:wallpaper.path}}/>
 
             <View style={styles.topbar}>
               <Ionicons
