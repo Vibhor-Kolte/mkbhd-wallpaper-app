@@ -14,8 +14,29 @@ export default function account(){
         <ThemedView style={{flex:1}}>
             <LoginButton/>
             <ThemeSelector/>
+            <About />
         </ThemedView>
     </SafeAreaView>
+}
+
+function About() {
+    return <ThemedView style={{padding: 20}}>
+        <ThemedText style={styles.bigText}>About</ThemedText>
+        <ThemedView style={{ marginTop: 10 }}>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Accont</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Privacy Policy</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Terms of Service</ThemedText>
+            </Pressable>
+            <Pressable>
+                <ThemedText style={{margin: 10, fontSize: 18}}>Licenses</ThemedText>
+            </Pressable>
+        </ThemedView>
+    </ThemedView>
 }
 
 function Header(){
