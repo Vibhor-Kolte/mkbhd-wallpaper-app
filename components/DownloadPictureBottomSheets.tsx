@@ -7,6 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
+import * as MediaLibrary from 'expo-media-library';
+import * as FileSystem from 'expo-file-system';
 
 export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
     onClose: () => void;
@@ -64,7 +66,7 @@ export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
             </ThemedView>
             {/* <Button title='Download Picture'/> */}
 
-            <DownloadButton/>
+            <DownloadButton url={wallpaper.path} />
 
           </ThemedView>
         </BottomSheetView>
@@ -72,11 +74,31 @@ export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
   );
 };
 
-function DownloadButton(){
+function DownloadButton({ url }: { url: string }){
   const theme = useColorScheme() ?? 'light';
   return(
-    <Pressable style={{backgroundColor:theme === 'light' ? Colors.light.icon : 'black', padding:10, marginHorizontal:30, borderRadius:20, justifyContent:"center", flexDirection: "row", borderWidth: 1,
-      borderColor: theme === 'light' ? Colors.light.text : Colors.dark.text,}}>
+    <Pressable 
+      onPress={async () => {
+        let date = new Date().getTime();
+        let fileUri = FileSystem.documentDirectory + `${date}.jpg`;
+        
+        try {
+            await FileSystem.downloadAsync(url, fileUri)
+            const response = await MediaLibrary.requestPermissionsAsync(true)
+            if (response.granted) {
+              MediaLibrary.createAssetAsync(fileUri)
+              alert("Image saved")
+            } else {
+              console.error("permission not granted")
+            }
+        } catch (err) {
+            console.log("FS Err: ", err)
+        }
+      }}
+      style={{
+        backgroundColor:theme === 'light' ? Colors.light.icon : 'black', padding:10, marginHorizontal:30, borderRadius:20, justifyContent:"center", flexDirection: "row", borderWidth: 1,
+        borderColor: theme === 'light' ? Colors.light.text : Colors.dark.text
+      }}>
         <Ionicons
           name={'download'}
           size={24}
