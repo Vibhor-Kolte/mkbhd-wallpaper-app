@@ -8,6 +8,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useCarousel } from "@/hooks/useCarousel";
 import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
 
+import {configureReanimatedLogger,ReanimatedLogLevel} from 'react-native-reanimated';
+configureReanimatedLogger({
+    level: ReanimatedLogLevel.warn,
+    strict: false,
+  });
+
 const TOPBAR_HEIGHT = 250;
 
 export default function explore(){
@@ -23,7 +29,7 @@ export default function explore(){
     });
 
     return <ThemedSafeAreaView style={{flex: 1}}>
-    <View style={{height:TOPBAR_HEIGHT}}>
+    <View style={{height:TOPBAR_HEIGHT - yOffset}}>
       <Carousel
         width={width}
         data={carouselItems}
@@ -50,6 +56,6 @@ export default function explore(){
       />
     </View>
     
-    <SplitView wallpapers={wallpapers} />
+    <SplitView onScroll={(yOffset) => {setScrollY(yOffset)}} wallpapers={wallpapers} />
   </ThemedSafeAreaView>
 }
