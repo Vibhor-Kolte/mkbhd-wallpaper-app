@@ -56,6 +56,7 @@ export default function explore(){
               <Image source={{uri: carouselItems[index].image}} style={{height: TOPBAR_HEIGHT}} />
             </View>
 
+            {/* Add shadow on the text */}
             <LinearGradient colors={['transparent', 'black']} style={{flex: 1, position: "absolute", zIndex: 10, height: TOPBAR_HEIGHT / 2, width: "100%", bottom: 0}}>
               <Animated.View style={textAnimatedStyle}>
                 <Text style={[{color: "white", paddingTop: TOPBAR_HEIGHT / 3, textAlign: "center", fontSize: 30, fontWeight: "600"}]}>{carouselItems[index].title}</Text>
