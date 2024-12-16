@@ -41,6 +41,7 @@ export const DownloadPictureBottomsheet = ({onClose, wallpaper}:{
                   name={'close'}
                   size={24}
                   color={theme === 'light' ? Colors.light.icon : Colors.dark.text}
+                  onPress={onClose}
                 />
                 <View style={styles.topbarleft}>
                   <Ionicons
