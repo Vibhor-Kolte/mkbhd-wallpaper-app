@@ -28,8 +28,18 @@ export default function explore(){
       };
     });
 
+    const headerAnimatedStyle = useAnimatedStyle(() => {
+        return {
+          transform: [
+            {
+              scale: interpolate(yOffset, [-TOPBAR_HEIGHT, 0, TOPBAR_HEIGHT], [1.5, 1, 1]),
+            },
+          ],
+        };
+      });
+
     return <ThemedSafeAreaView style={{flex: 1}}>
-    <View style={{height:TOPBAR_HEIGHT - yOffset}}>
+    <Animated.View style={[{height: Math.max(0, TOPBAR_HEIGHT - yOffset)}, headerAnimatedStyle]}>
       <Carousel
         width={width}
         data={carouselItems}
@@ -54,7 +64,7 @@ export default function explore(){
           </>
         )}
       />
-    </View>
+    </Animated.View>
     
     <SplitView onScroll={(yOffset) => {setScrollY(yOffset)}} wallpapers={wallpapers} />
   </ThemedSafeAreaView>
