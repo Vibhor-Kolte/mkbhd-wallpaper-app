@@ -17,6 +17,7 @@ import { useLibraryWallpapers, useLikedWallpapers, useSuggestedWallpapers, useWa
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { ThemedSafeAreaView } from "@/components/ThemedSafeAreaView";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,7 +25,7 @@ export default function foryou(){
     const theme = useColorScheme() ?? 'light';
     
     return(
-        <View style={styles.container}>
+        <ThemedSafeAreaView style={styles.container}>
             <Tab.Navigator style={styles.container}
                 screenOptions={{
                     tabBarActiveTintColor: Colors[theme].tint,
@@ -40,32 +41,32 @@ export default function foryou(){
                 <Tab.Screen name="Liked" component={LikedScreen}/>
                 <Tab.Screen name="Suggested" component={SuggestedScreen}/>
             </Tab.Navigator>
-        </View>
+        </ThemedSafeAreaView>
     );
 }
 
 function LibraryScreen(){
     const libraryWallpapers = useLibraryWallpapers();
-    return <ThemedView style={styles.container}>
+    return <ThemedSafeAreaView style={styles.container}>
         {/* <Text>Library Screen....</Text> */}
         <SplitView wallpapers={libraryWallpapers}/>
-    </ThemedView>
+    </ThemedSafeAreaView>
 }
 
 function LikedScreen(){
     const likedWallpapers = useLikedWallpapers();
-    return <ThemedView style={styles.container}>
+    return <ThemedSafeAreaView style={styles.container}>
         {/* <Text>Liked Screen....</Text> */}
         <SplitView wallpapers={likedWallpapers}/>
-    </ThemedView>
+    </ThemedSafeAreaView>
 }
 
 function SuggestedScreen(){
     const suggestedWallpapers = useSuggestedWallpapers();
-    return <ThemedView style={styles.container}>
+    return <ThemedSafeAreaView style={styles.container}>
         {/* <Text>Suggested Screen....</Text> */}
         <SplitView wallpapers={suggestedWallpapers}/>
-    </ThemedView>
+    </ThemedSafeAreaView>
 }
 
 const styles = StyleSheet.create({

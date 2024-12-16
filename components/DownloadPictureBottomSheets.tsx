@@ -80,8 +80,8 @@ function DownloadButton({ url }: { url: string }){
   return(
     <Pressable 
       onPress={async () => {
-        let date = new Date().getTime();
-        let fileUri = FileSystem.documentDirectory + `${date}.jpg`;
+        let dateTime = new Date().getTime();
+        let fileUri = FileSystem.documentDirectory + `${dateTime}.jpg`;
         
         try {
             await FileSystem.downloadAsync(url, fileUri)
