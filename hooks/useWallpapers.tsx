@@ -1,5 +1,6 @@
 export interface Wallpaper {
-  path: any; // Use `any` to store the imported image object
+  // path: any; // Use `any` to store the imported image object
+  path: string;
   name: string;
 }
   
